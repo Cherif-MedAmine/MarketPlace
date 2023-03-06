@@ -26,11 +26,16 @@ public class Basket implements Serializable{
     @OneToOne (mappedBy = "basketU")
             @JsonIgnore
    private User userB;
-    @ManyToMany(mappedBy = "pbaskets")
-            @JsonIgnore
-    private List<Product> products;
+//    @ManyToMany(mappedBy = "baskets")
+//            @JsonIgnore
+//    private List<Product> products;
 
     @OneToOne
     @JsonIgnore
    private Transaction transaction;
+    @OneToMany(mappedBy = "basket")
+    @JsonIgnore
+    private  List<ProductBasket>productBaskets;
+
+
 }

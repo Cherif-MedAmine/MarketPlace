@@ -1,7 +1,7 @@
 package tn.esprit.marketplace.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import tn.esprit.marketplace.enums.CouponType;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -15,11 +15,11 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @Entity
-public class Coupon {
+public class  Coupon {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idCoupon;
-    private String code;
+    private String code=null;
     private  float discount;
     private  float percentage;
     private Date startDate;

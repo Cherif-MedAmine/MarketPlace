@@ -1,30 +1,28 @@
 package tn.esprit.marketplace.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 import tn.esprit.marketplace.entities.AttachementProduct;
 import tn.esprit.marketplace.repositories.*;
+import tn.esprit.marketplace.services.interfaces.IAttachementService;
 
-import java.nio.file.Paths;
 
+@AllArgsConstructor
 @Service
-public class AttachementService implements IAttachementService{
-    @Autowired
+public class AttachementService implements IAttachementService {
+
     UserRepository userRepository;
-    @Autowired
-    AttachementRepository attachementRepository;
-    @Autowired
-    FavorisReopository favorisReopository;
-    @Autowired
+    AttachmentRepository attachmentRepository;
+
     BasketRepository basketRepository;
-    @Autowired
+
     ProductRepository productRepository;
-      @Override
-     public AttachementProduct addAttachement(MultipartFile[] files){
 
+    @Override
+    public AttachementProduct addAttachment(AttachementProduct attachementProduct){
 
-          return null;
-      }
+        return attachmentRepository.save(attachementProduct);
+    }
+
 
 }

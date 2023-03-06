@@ -1,26 +1,28 @@
 package tn.esprit.marketplace.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-import tn.esprit.marketplace.entities.Basket;
-import tn.esprit.marketplace.entities.Favoris;
+import tn.esprit.marketplace.entities.CategoryProduct;
+import tn.esprit.marketplace.entities.Favorite;
 import tn.esprit.marketplace.entities.Product;
 import tn.esprit.marketplace.entities.User;
 import tn.esprit.marketplace.repositories.*;
+import tn.esprit.marketplace.services.interfaces.IProductServices;
 
+import java.util.List;
+
+@AllArgsConstructor
 @Service
-public class ProductService implements IProductServices{
-    @Autowired
+public class ProductService implements IProductServices {
+
     UserRepository userRepository;
-    @Autowired
-    AttachementRepository attachementRepository;
-    @Autowired
-    FavorisReopository favorisReopository;
-    @Autowired
+
+    FavoriteReopository favoriteReopository;
+
     BasketRepository basketRepository;
-    @Autowired
+    CategoryProductRepository categoryProductRepository;
     ProductRepository productRepo;
-    @Autowired
+
     UserRepository userRepo;
 
     @Override
@@ -28,15 +30,7 @@ public class ProductService implements IProductServices{
 
         return productRepo.save(product);
     }
-    @Override
-    public Product addProductToBasket(Long idProduct, Long idUser){
-        Product p=productRepo.findById(idProduct).get();
-        User u=userRepo.findById(idUser).get();
-        Basket b=u.getBasketU();
-        p.getPbaskets().add(b);
 
-        return productRepo.save(p);
-    }
     @Override
     public Product likeProduct(Long idProduct){
         Product p=productRepo.findById(idProduct).get();
@@ -54,11 +48,11 @@ public class ProductService implements IProductServices{
         return productRepo.save(p);
     }
     @Override
-   public Product addProductToFavoris(Long idProduct, Long idUser){
+   public Product addProductToFavorite(Long idProduct, Long idUser){
        Product p=productRepo.findById(idProduct).get();
         User u=userRepo.findById(idUser).get();
-        Favoris f=u.getFavorisU();
-        p.getPfavoris().add(f);
+         Favorite f=u.getFavoriteU();
+        p.getPfavorite().add(f);
         return productRepo.save(p);
     }
     @Override
@@ -66,12 +60,29 @@ public class ProductService implements IProductServices{
 
         return productRepo.save(product);
     }
-    @Override
-    public void deleteProduct(Product product){
-         productRepo.delete(product);
-    }
+
     @Override
     public void deleteProductById(Long idProduct){
         productRepo.deleteById(idProduct);
     }
+    @Override
+    public  Product addCategoryToProduct(Long idProduct, Long idCategory){
+        Product p=productRepo.findById(idProduct).get();
+        CategoryProduct c=categoryProductRepository.findById(idCategory).get();
+        p.setCategoryProduct(c);
+        return productRepo.save(p);
+    }
+    @Override
+    public List<Product> getAllProduct(){
+
+        return productRepo.findAll();
+    }
+    @Override
+    public List<Product> getProductByCategory(String categoryName){
+
+        return productRepo.getProductsByCategoryProduct_NameCategoryP(categoryName);
+    }
+
+
+
 }

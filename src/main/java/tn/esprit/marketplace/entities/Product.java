@@ -5,7 +5,9 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -27,19 +29,30 @@ public class Product implements Serializable {
     private  int likes;
     private String description;
 
-   @ManyToMany
-  @JsonIgnore
-   private List<Basket> pbaskets;
+//    @ManyToMany
+//    @JsonIgnore
+//    private List<Basket> baskets;
     @ManyToMany
     @JsonIgnore
-   private List<Favoris> pfavoris;
+    private List<Favorite> pfavorite;
 
-   @OneToMany (mappedBy = "attproduct")
-   private List<AttachementProduct> attachmentProducts;
-   @ManyToOne
+    @OneToMany (mappedBy = "attproduct")
+    @JsonIgnore
+
+    private Set<AttachementProduct> attachmentProducts = new HashSet<>();
+    @ManyToOne
+    @JsonIgnore
     private CategoryProduct categoryProduct;
     @ManyToMany
+    @JsonIgnore
     private List<Catalog> catalogs;
     @ManyToOne
+    @JsonIgnore
     private Store store;
+
+    @OneToMany(mappedBy = "product")
+    @JsonIgnore
+    private  List<ProductBasket>productBaskets;
+
+
 }

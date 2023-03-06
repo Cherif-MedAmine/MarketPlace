@@ -1,6 +1,7 @@
 package tn.esprit.marketplace.entities;
 
 import lombok.*;
+import tn.esprit.marketplace.enums.RoleType;
 
 import javax.persistence.*;
 import java.util.List;

@@ -33,7 +33,7 @@ public class User  implements Serializable{
     private Basket basketU;
 
     @OneToOne(cascade = CascadeType.ALL)
-    private Favoris favorisU;
+    private Favorite favoriteU;
 
     @ManyToOne
     @JsonIgnore

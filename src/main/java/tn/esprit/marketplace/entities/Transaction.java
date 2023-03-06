@@ -1,6 +1,8 @@
 package tn.esprit.marketplace.entities;
 
 import lombok.*;
+import tn.esprit.marketplace.enums.OperationType;
+import tn.esprit.marketplace.enums.TransactionType;
 
 import javax.persistence.*;
 import java.util.Date;
