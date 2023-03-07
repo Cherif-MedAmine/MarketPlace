@@ -2,6 +2,7 @@ package tn.esprit.marketplace.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -16,18 +17,38 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @Entity
-public class User  implements Serializable{
+@Table(name = "user")
+public class User implements Serializable {
     @Id
+    @Column(name = "idUser")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idUser;
-    private String firstName;
-    private  String lastName;
-    private  String password;
-    private  String email;
+
+    @Column(name = "userName")
+    private String userName;
+
+    @Column(name = "password")
+    private String password;
+
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "creationDate")
+    @Temporal(TemporalType.DATE)
     private Date creationDate;
-    private  String phoneNumber;
-    private  Boolean premium;
-    private  float score;
+
+    @Column(name = "phoneNumber")
+    private String phoneNumber;
+
+    @Column(name = "premium")
+    private Boolean premium;
+
+    @Column(name = "score")
+    private float score;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Role role;
 
     @OneToOne(cascade = CascadeType.ALL)
     private Basket basketU;
@@ -35,26 +56,38 @@ public class User  implements Serializable{
     @OneToOne(cascade = CascadeType.ALL)
     private Favorite favoriteU;
 
-    @ManyToOne
-    @JsonIgnore
-    private Role role;
-
     @ManyToMany
     @JsonIgnore
-    private List<SAV>savs;
+    private List<SAV> savs;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(/*cascade = CascadeType.ALL*/)
+    @JsonIgnore
     private Store store;
 
     @OneToOne(cascade = CascadeType.ALL)
-   private MailBox box;
+    private MailBox box;
+
 
     @OneToMany(mappedBy = "user")
     @JsonIgnore
-
     private List<CreditCard> creditCards;
 
-    @ManyToMany
+    @OneToMany(mappedBy = "userCoupon")
     @JsonIgnore
     private List<Coupon> coupons;
+
+    @OneToMany(mappedBy = "likeUser")
+    @JsonIgnore
+    private List<StoreLike> storeLikesUser;
+
+    public User(String userName, String password, List<GrantedAuthority> authorities) {
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public Role getRole() {
+        return role;
+    }
 }

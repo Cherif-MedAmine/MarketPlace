@@ -16,8 +16,10 @@ import java.util.List;
 public class CategoryStore {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idCategoryS;
-    private String nameCategoryS;
+    private Long idCategoryStore;
+    @Column(unique = true)
+    private String nameCategoryStore;
+
     @ManyToMany
     private List<Store> stores;
 }

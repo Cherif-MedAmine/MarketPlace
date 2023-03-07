@@ -1,8 +1,6 @@
 package tn.esprit.marketplace.entities;
 
 import lombok.*;
-import tn.esprit.marketplace.enums.OperationType;
-import tn.esprit.marketplace.enums.TransactionType;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -19,22 +17,14 @@ public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idTransaction;
-    private String ribSend;
-    private String ribRec;
-    private  float price;
-    private Date TransactionDate;
-    private  float tax;
-    private  String clientAddress;
-    private float finalPrice;
-    private Boolean status;
-    @Enumerated(EnumType.STRING)
-    private TransactionType transactionType;
-    @Enumerated(EnumType.STRING)
-    private OperationType operationType;
+    private Double total_amount;
+    private Date Transaction_date;
+    private String username;
+
 
     @OneToOne(mappedBy = "transaction")
-   private Basket basket;
-    @ManyToOne
-   private Delivery delivery;
+    private Basket basket;
+    @OneToOne
+    Delivery delivery;
 
 }

@@ -22,6 +22,6 @@ public class Delivery {
     private Date startDate;
     private Date endDate;
 
-    @OneToMany(mappedBy = "delivery")
-    private List<Transaction> transactions;
+    @OneToOne(mappedBy = "delivery")
+    private Transaction transaction;
 }
