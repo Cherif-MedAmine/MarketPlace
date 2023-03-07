@@ -1,10 +1,11 @@
 package tn.esprit.marketplace.entities;
 
 import lombok.*;
+import tn.esprit.marketplace.enums.DeliveryType;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.List;
+import java.time.LocalDateTime;
+
 
 @Getter
 @Setter
@@ -19,9 +20,12 @@ public class Delivery {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idDelivery;
     private String nameDelivery;
-    private Date startDate;
-    private Date endDate;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
+    private String address;
+    @Enumerated(EnumType.STRING)
+    DeliveryType status;
 
-    @OneToMany(mappedBy = "delivery")
-    private List<Transaction> transactions;
+    @OneToOne(mappedBy = "delivery")
+    Transaction transaction;
 }
