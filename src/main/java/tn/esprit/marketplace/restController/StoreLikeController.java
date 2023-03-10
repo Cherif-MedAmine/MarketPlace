@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import tn.esprit.marketplace.services.interfaces.IStoreLikeService;
 
 @RestController
-@RequestMapping("/storeLike")
+@RequestMapping("/api/storeLike")
 public class StoreLikeController {
 
     @Autowired

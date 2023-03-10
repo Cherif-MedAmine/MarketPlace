@@ -19,7 +19,7 @@ public interface IUserService {
     //////////////////////////////////////////////////////////////
 
     //User addUserDTO(UserDTO userDTO);
-    //void addUserWithStore(User user);
+    void addUserWithStore(User user);
     User addUserWithoutStore(User user);
     void affectStoreToUser(Long idStore, Long idUser);
 }

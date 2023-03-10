@@ -15,7 +15,11 @@ public class ConstUtils {
     public static final String USER_NOT_EXIST = "Couldn't find the user ";
     public static final String CATEGORY_STORE_NOT_EXIST = "Couldn't find the store category ";
     public static final String COUPON_NOT_EXIST = "Couldn't find the coupon ";
-    public static final String STORE_LIKE_NOT_EXIST ="Couldn't find the store Like";
+    public static final String STORE_LIKE_NOT_EXIST = "Couldn't find the store Like";
+    public static final String BASKET_NOT_EXIST = "Couldn't find the basket ";
+    public static final String WORKFLOW_NOT_EXIST = "Couldn't find the workflow ";
+
+    public static final String FILE_UPLOADED_SUCCESSFULLY = "File uploaded successfully";
 
     public static final String ENTITY_EXIST = "The entity %s already exist";
 }

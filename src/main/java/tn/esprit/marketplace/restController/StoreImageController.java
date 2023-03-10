@@ -1,29 +1,42 @@
 package tn.esprit.marketplace.restController;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import tn.esprit.marketplace.services.interfaces.IStoreLikeService;
+import org.springframework.web.multipart.MultipartFile;
+import tn.esprit.marketplace.services.StoreImageService;
+
+import java.io.IOException;
 
 @RestController
-@RequestMapping("/storeLike")
-public class StoreLikeController {
+@RequestMapping("/api/storeImage")
+public class StoreImageController {
 
     @Autowired
-    IStoreLikeService iStoreLikeService;
+    private StoreImageService storeImageService;
 
-    @PostMapping("/likeStore/{idUser}/{idStore}")
-    public void likeStore(@PathVariable("idUser") Long idUser, @PathVariable("idStore") Long idStore) {
-        iStoreLikeService.likeStore(idUser, idStore);
+    @PostMapping("/{idStore}")
+    public ResponseEntity<?> uploadImage(@RequestParam("image") MultipartFile file,@PathVariable("idStore") Long idStore) throws IOException {
+        String uploadImage = storeImageService.uploadImage(file, idStore);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(uploadImage);
     }
 
-    @DeleteMapping("/dislikeStore/{idUser}/{idStore}")
-    public void dislikeStore(@PathVariable("idUser") Long idUser, @PathVariable("idStore") Long idStore) {
-        iStoreLikeService.dislikeStore(idUser, idStore);
+    @GetMapping("/{idStoreImage}")
+    public ResponseEntity<?> downloadImage(@PathVariable Long idStoreImage) {
+        byte[] storeImage = storeImageService.downloadImage(idStoreImage);
+        return ResponseEntity.status(HttpStatus.OK)
+                .contentType(MediaType.valueOf("image/png"))
+                .body(storeImage);
     }
 
-    @GetMapping("/countLikesByStore/{idStore}")
-    public int countLikesByStore(@PathVariable("idStore") Long idStore) {
-        return iStoreLikeService.countLikesByStore(idStore);
+    @PutMapping("/{idStore}/{idStoreImage}")
+    public ResponseEntity<?> updateImage(@RequestParam("image") MultipartFile file,@PathVariable("idStore") Long idStore,@PathVariable("idStoreImage") Long idStoreImage) throws IOException {
+        String updateImage = storeImageService.updateImage(file, idStore, idStoreImage);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(updateImage);
     }
 
 }

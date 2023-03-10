@@ -8,7 +8,7 @@ import tn.esprit.marketplace.services.interfaces.ICouponService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/coupon")
+@RequestMapping("/api/coupon")
 public class CouponController {
 
     @Autowired

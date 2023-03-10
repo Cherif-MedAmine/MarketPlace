@@ -1,2 +1,18 @@
-package tn.esprit.marketplace.services.interfaces;public class ITransactionService {
+package tn.esprit.marketplace.services.interfaces;
+
+
+import tn.esprit.marketplace.entities.Transaction;
+
+import java.util.List;
+
+public interface ITransactionService {
+
+    Transaction addTransaction(Transaction transaction);
+
+    void deleteTransactionById(Long idTransaction);
+
+    Transaction updateTransactionById(Long idTransaction, Transaction transaction);
+
+    List<Transaction> getListTransaction();
+
 }

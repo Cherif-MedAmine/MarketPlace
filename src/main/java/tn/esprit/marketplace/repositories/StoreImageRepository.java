@@ -1,18 +1,13 @@
 package tn.esprit.marketplace.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import tn.esprit.marketplace.entities.Store;
-import tn.esprit.marketplace.entities.StoreLike;
-import tn.esprit.marketplace.entities.User;
+import tn.esprit.marketplace.entities.StoreImage;
+
+import java.util.Optional;
 
 @Repository
-public interface StoreImageRepository extends JpaRepository<StoreLike, Long> {
+public interface StoreImageRepository extends JpaRepository<StoreImage, Long> {
 
-    StoreLike findByLikeUserAndLikeStore(User user, Store store);
-
-    @Query("SELECT COUNT(sl) FROM StoreLike sl WHERE sl.likeStore = :store")
-    int countLikesByStore(@Param("store") Store store);
+    Optional<StoreImage> findByName(String fileName);
 }

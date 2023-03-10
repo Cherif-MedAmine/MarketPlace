@@ -1,8 +1,10 @@
 package tn.esprit.marketplace.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Getter
@@ -13,7 +15,7 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @Entity
-public class CategoryStore {
+public class CategoryStore implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idCategoryStore;
@@ -21,5 +23,6 @@ public class CategoryStore {
     private String nameCategoryStore;
 
     @ManyToMany
+    @JsonIgnore
     private List<Store> stores;
 }

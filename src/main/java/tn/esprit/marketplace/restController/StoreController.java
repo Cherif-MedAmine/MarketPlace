@@ -11,7 +11,7 @@ import tn.esprit.marketplace.services.interfaces.IStoreService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/store")
+@RequestMapping("/api/store")
 public class StoreController {
 
     @Autowired

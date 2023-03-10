@@ -2,7 +2,6 @@ package tn.esprit.marketplace.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -60,13 +59,12 @@ public class User implements Serializable {
     @JsonIgnore
     private List<SAV> savs;
 
-    @OneToOne(/*cascade = CascadeType.ALL*/)
+    @OneToOne
     @JsonIgnore
     private Store store;
 
     @OneToOne(cascade = CascadeType.ALL)
     private MailBox box;
-
 
     @OneToMany(mappedBy = "user")
     @JsonIgnore
@@ -80,7 +78,7 @@ public class User implements Serializable {
     @JsonIgnore
     private List<StoreLike> storeLikesUser;
 
-    public User(String userName, String password, List<GrantedAuthority> authorities) {
+   /* public User(String userName, String password, List<GrantedAuthority> authorities) {
     }
 
     public String getUserName() {
@@ -89,5 +87,5 @@ public class User implements Serializable {
 
     public Role getRole() {
         return role;
-    }
+    }*/
 }

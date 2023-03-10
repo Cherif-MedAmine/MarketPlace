@@ -60,14 +60,14 @@ public class UserController {
         iUserService.addUserWithStore(user);
     }*/
 
-    @PostMapping("/addUserWithoutStore")
+    /*@PostMapping("/addUserWithoutStore")
     User addUserWithoutStore(@RequestBody User user) {
         return iUserService.addUserWithoutStore(user);
-    }
+    }*/
 
-    @PutMapping("/affectStoreToUser/{idStore}/{idUser}")
+    /*@PutMapping("/affectStoreToUser/{idStore}/{idUser}")
     public void affectStoreToUser(@PathVariable("idStore") Long idStore,@PathVariable("idUser") Long idUser) {
         iUserService.affectStoreToUser(idStore, idUser);
-    }
+    }*/
 
 }

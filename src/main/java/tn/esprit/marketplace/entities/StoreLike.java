@@ -3,6 +3,7 @@ package tn.esprit.marketplace.entities;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Getter
 @Setter
@@ -12,7 +13,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Builder
 @Entity
-public class StoreLike {
+public class StoreLike implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idStoreLike;

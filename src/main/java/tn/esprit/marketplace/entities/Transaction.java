@@ -1,9 +1,11 @@
 package tn.esprit.marketplace.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -21,10 +23,14 @@ public class Transaction {
     private Date Transaction_date;
     private String username;
 
-
-    @OneToOne(mappedBy = "transaction")
+    @OneToOne
     private Basket basket;
+
     @OneToOne
     Delivery delivery;
+
+    @OneToMany(mappedBy = "transaction")
+    @JsonIgnore
+    private List<Workflow> workflows;
 
 }

@@ -1,11 +1,18 @@
 package tn.esprit.marketplace.services.interfaces;
 
-public interface IStoreLikeService {
+import tn.esprit.marketplace.entities.Workflow;
 
-    void likeStore(Long idUser, Long idStore);
+import java.util.Date;
+import java.util.List;
 
-    void dislikeStore(Long idUser, Long idStore);
+public interface IWorkflowService {
 
-    int countLikesByStore(Long idStore);
+    void addWorkflow(Long idBasket);
+    List<Workflow> getAllWorkflows();
+    List<Workflow> getWorkflowsByStoreId(Long idStore);
+    List<Workflow> getWorkflowsByDateBetween(Long idStore, Date startDate, Date endDate);
+    float getIncomeBySeller(Long idStore);
+    float getIncomeByDate(Long idStore, Date date);
+
 
 }

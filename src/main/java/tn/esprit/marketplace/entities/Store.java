@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -14,18 +16,22 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @Entity
-public class Store {
+public class Store implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idStore;
     @Column(unique = true)
     private String nameStore;
     private boolean status;
-    private String attStore;
     private String link;
-    private Long creationDate;
+    @Temporal(TemporalType.DATE)
+    private Date creationDate;
     private String description;
     private String storeAddress;
+
+    @OneToOne
+    @JsonIgnore
+    private StoreImage storeImage;
 
     @OneToOne(mappedBy = "store")
     private User user;
@@ -42,11 +48,4 @@ public class Store {
     @JsonIgnore
     private List<StoreLike> storeLikesStore;
 
-    /*public Store(String nameStore, String attStore, String link, String description, String storeAddress) {
-        this.nameStore = nameStore;
-        this.attStore = attStore;
-        this.link = link;
-        this.description = description;
-        this.storeAddress = storeAddress;
-    }*/
 }

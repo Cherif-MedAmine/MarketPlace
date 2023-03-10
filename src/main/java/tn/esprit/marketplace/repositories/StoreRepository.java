@@ -21,6 +21,8 @@ public interface StoreRepository extends JpaRepository<Store, Long> {
 
     Page<Store> findAllBy(Pageable pageable);
 
+    Store findByUserIdUser(Long idUser);
+
     @Query("SELECT s FROM Store s LEFT JOIN s.storeLikesStore sl GROUP BY s.idStore ORDER BY COUNT(sl.idStoreLike) DESC")
     List<Store> findAllOrderByLikes();
 

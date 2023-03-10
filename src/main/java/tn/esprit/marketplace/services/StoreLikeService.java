@@ -1,5 +1,6 @@
 package tn.esprit.marketplace.services;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.esprit.marketplace.entities.Store;
@@ -13,15 +14,11 @@ import tn.esprit.marketplace.services.interfaces.IStoreLikeService;
 import tn.esprit.marketplace.utils.ConstUtils;
 
 @Service
+@AllArgsConstructor
 public class StoreLikeService implements IStoreLikeService {
 
-    @Autowired
     StoreLikeRepository storeLikeRepository;
-
-    @Autowired
     StoreRepository storeRepository;
-
-    @Autowired
     UserRepository userRepository;
 
     @Override

@@ -1,11 +1,14 @@
 package tn.esprit.marketplace.services.interfaces;
 
-public interface IStoreLikeService {
+import org.springframework.web.multipart.MultipartFile;
 
-    void likeStore(Long idUser, Long idStore);
+import java.io.IOException;
 
-    void dislikeStore(Long idUser, Long idStore);
+public interface IStoreImageService {
 
-    int countLikesByStore(Long idStore);
+    String uploadImage(MultipartFile file, Long idStore) throws IOException;
+    byte[] downloadImage(Long idStoreImage);
+
+    String updateImage(MultipartFile file, Long idStore, Long idStoreImage) throws IOException;
 
 }

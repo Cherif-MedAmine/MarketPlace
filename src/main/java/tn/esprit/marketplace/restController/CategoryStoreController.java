@@ -5,9 +5,11 @@ import org.springframework.web.bind.annotation.*;
 import tn.esprit.marketplace.entities.CategoryStore;
 import tn.esprit.marketplace.services.interfaces.ICategoryStoreService;
 
+import java.util.List;
+
 
 @RestController
-@RequestMapping("/categoryStore")
+@RequestMapping("/api/categoryStore")
 public class CategoryStoreController {
 
     @Autowired
@@ -26,6 +28,11 @@ public class CategoryStoreController {
     @GetMapping("/findCategoryStore/{categoryStoreName}")
     public CategoryStore findCategoryStoreByName(@PathVariable("categoryStoreName") String name) {
         return iCategoryStoreService.findCategoryStoreByName(name);
+    }
+
+    @GetMapping("/findAllCategoryStores")
+    public List<CategoryStore> findAllCategoryStores() {
+        return iCategoryStoreService.findAllCategoryStores();
     }
 
     @PutMapping("/updateCategoryStore")

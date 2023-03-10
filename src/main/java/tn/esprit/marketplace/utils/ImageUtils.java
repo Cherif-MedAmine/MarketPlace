@@ -1,4 +1,4 @@
-package com.javatechie.util;
+package tn.esprit.marketplace.utils;
 
 import java.io.ByteArrayOutputStream;
 import java.util.zip.Deflater;

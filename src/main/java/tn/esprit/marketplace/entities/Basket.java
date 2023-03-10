@@ -21,7 +21,6 @@ public class Basket implements Serializable {
     private Long idBasket;
     private float totalPrice;
 
-
     @OneToOne(mappedBy = "basketU")
     @JsonIgnore
     private User userB;
@@ -29,9 +28,10 @@ public class Basket implements Serializable {
 //            @JsonIgnore
 //    private List<Product> products;
 
-    @OneToOne
+    @OneToOne(mappedBy = "basket")
     @JsonIgnore
     private Transaction transaction;
+
     @OneToMany(mappedBy = "basket")
     @JsonIgnore
     private List<ProductBasket> productBaskets;

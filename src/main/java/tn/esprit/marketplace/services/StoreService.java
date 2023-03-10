@@ -1,6 +1,6 @@
 package tn.esprit.marketplace.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -12,25 +12,18 @@ import tn.esprit.marketplace.exception.GenericException;
 import tn.esprit.marketplace.repositories.CategoryStoreRepository;
 import tn.esprit.marketplace.repositories.ProductRepository;
 import tn.esprit.marketplace.repositories.StoreRepository;
-import tn.esprit.marketplace.repositories.UserRepository;
 import tn.esprit.marketplace.services.interfaces.IStoreService;
 import tn.esprit.marketplace.utils.ConstUtils;
 
-import java.util.*;
+import java.util.List;
+import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class StoreService implements IStoreService {
 
-    @Autowired
     StoreRepository storeRepository;
-
-    @Autowired
-    UserRepository userRepository;
-
-    @Autowired
     ProductRepository productRepository;
-
-    @Autowired
     CategoryStoreRepository categoryStoreRepository;
 
     @Override
@@ -38,7 +31,6 @@ public class StoreService implements IStoreService {
         if (ObjectUtils.isEmpty(store))
             throw new GenericException(ConstUtils.STORE_NOT_EXIST);
         store.setStatus(false);
-        store.setCreationDate(new Date().getTime());
         return storeRepository.save(store);
     }
 
@@ -99,10 +91,14 @@ public class StoreService implements IStoreService {
 
     @Override
     public void affectCategoryToStore(Long idCategory, Long idStore) {
-        CategoryStore categoryStore = categoryStoreRepository.findById(idCategory).get();
-        Store store = storeRepository.findById(idStore).get();
-        categoryStore.getStores().add(store);
-        categoryStoreRepository.save(categoryStore);
+        /*CategoryStore categoryStore = categoryStoreRepository.findById(idCategory)
+                .orElseThrow(() -> new RuntimeException("Category not found"));
+
+        Store store = storeRepository.findById(idStore)
+                .orElseThrow(() -> new RuntimeException("Store not found"));
+
+        store.setCategoryStore(categoryStore);
+        categoryStoreRepository.save(categoryStore);*/
     }
 
     @Override
