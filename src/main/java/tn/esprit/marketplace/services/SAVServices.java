@@ -20,7 +20,7 @@ public class SAVServices implements ISAVServices {
 
 
 
-    @Autowired
+
     SAVRepository savRepository;
     @Override
     public List<SAV> getAllSAVS() {
