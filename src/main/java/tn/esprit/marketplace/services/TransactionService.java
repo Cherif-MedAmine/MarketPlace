@@ -6,6 +6,7 @@ import tn.esprit.marketplace.entities.Transaction;
 import tn.esprit.marketplace.repositories.TransactionRepository;
 import tn.esprit.marketplace.services.interfaces.ITransactionService;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,8 +19,8 @@ public class TransactionService implements ITransactionService {
     @Override
     public Transaction addTransaction(Transaction transaction) {
         return transactionRepository.save(transaction);
-
     }
+
 
 
     @Override
@@ -30,13 +31,13 @@ public class TransactionService implements ITransactionService {
 
     @Override
     public Transaction updateTransactionById(Long idTransaction, Transaction transaction) {
-        Transaction transaction1 = transactionRepository.findById(idTransaction).get();
-        transaction1.setIdTransaction(transaction.getIdTransaction());
-        transaction1.setTransaction_date(transaction.getTransaction_date());
-        transaction1.setTotal_amount(transaction.getTotal_amount());
-        transaction1.setUsername(transaction.getUsername());
+         Transaction transaction1 = transactionRepository.findById(idTransaction).get();
+            transaction1.setIdTransaction(transaction.getIdTransaction());
+            transaction1.setTransaction_date(transaction.getTransaction_date());
+            transaction1.setTotal_amount(transaction.getTotal_amount());
+            transaction1.setUsername(transaction.getUsername());
 
-        return transactionRepository.save(transaction1);
+            return transactionRepository.save(transaction1);
 
     }
 
@@ -46,5 +47,13 @@ public class TransactionService implements ITransactionService {
         transactionRepository.findAll().forEach(transactions::add);
         return transactions;
     }
+
+
+
+
+
+
+
+
 
 }
