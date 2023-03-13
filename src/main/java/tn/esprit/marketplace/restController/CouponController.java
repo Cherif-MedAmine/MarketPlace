@@ -1,57 +1,51 @@
 package tn.esprit.marketplace.restController;
 
-import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.marketplace.entities.Coupon;
-import tn.esprit.marketplace.entities.Product;
 import tn.esprit.marketplace.services.interfaces.ICouponService;
 
 import java.util.List;
 
 @RestController
-@AllArgsConstructor
 @RequestMapping("/api/coupon")
 public class CouponController {
-    ICouponService couponService;
 
+    @Autowired
+    ICouponService iCouponService;
 
-    @PostMapping("/add")
-    Coupon addCoupon(@RequestBody Coupon coupon) {
-
-        return couponService.addCoupon(coupon);
+    @PostMapping("/addCoupon")
+    public Coupon addCoupon(@RequestBody Coupon coupon) {
+        return iCouponService.addCoupon(coupon);
     }
-    @PutMapping("/update")
+
+    @PostMapping("/addCouponAndAffectToUser/{idUser}")
+    public void addCouponAndAffectToUser(@RequestBody Coupon coupon, @PathVariable("idUser") Long idUser) {
+        iCouponService.addCouponAndAffectToUser(coupon, idUser);
+    }
+
+    @GetMapping("/findCouponById/{idCoupon}")
+    public Coupon findCouponById(@PathVariable("idCoupon") Long idCoupon) {
+        return iCouponService.findCouponById(idCoupon);
+    }
+
+    @GetMapping("/getCoupon/{couponCode}")
+    public Coupon getCouponByCode(@PathVariable("couponCode") String code) {
+        return iCouponService.getCouponByCode(code);
+    }
+
+    @GetMapping("/findAllCoupon")
+    public List<Coupon> findAllCoupon() {
+        return iCouponService.findAllCoupon();
+    }
+
+    @PutMapping("/updateCoupon")
     public Coupon updateCoupon(@RequestBody Coupon coupon) {
-        return couponService.updateCoupon(coupon);
-    }
-    @DeleteMapping("deleteCouponById")
-    public void deleteCouponById(@RequestParam Long idCouponuct) {
-        couponService.deleteCouponById(idCouponuct);
-    }
-    @GetMapping("get_all")
-    public List<Coupon> getAllCoupon(){
-
-        return couponService.getAllCoupon();
-    }
-    @GetMapping("get_coupon_code")
-    public Coupon getCouponByCode(@RequestParam String code){
-
-        return couponService.getCouponByCo(code);
-    }
-    @GetMapping("wheel_chance")
-    public Coupon wheelChance(){
-
-        return couponService.wheelChance();
-    }
-    @GetMapping("coupons_gift")
-    public List<Coupon> getCouponsGift(){
-
-        return couponService.getCouponsGift();
+        return iCouponService.updateCoupon(coupon);
     }
 
-    @GetMapping("coupons_return")
-    public List<Coupon> getCouponsReturn(){
-
-        return couponService.getCouponsReturn();
+    @DeleteMapping("/deleteCoupon/{couponId}")
+    public void deleteStore(@PathVariable("couponId") Long id) {
+        iCouponService.deleteCoupon(id);
     }
 }
