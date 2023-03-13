@@ -12,21 +12,21 @@ import java.util.List;
 public class CatalogController {
     @Autowired
     ICatalogService iCatalogService;
-    @GetMapping
+    @GetMapping("/GetALL")
     public List<Catalog> getAllCatalogs() {
         return iCatalogService.getAllCatalogs();
     }
 
-    @GetMapping("/GetCatalogById")
+    @GetMapping("/GetById")
     public Catalog getCatalogById(@PathVariable Long idCatalog) {
         return iCatalogService.getCatalogById(idCatalog);
     }
 
-    @PostMapping("/AddCatalog")
+    @PostMapping("/add")
     public void addCatalog(@RequestBody Catalog catalog) {
         iCatalogService.addCatalog(catalog);
     }
-    @PutMapping("UpdateCatalog")
+    @PutMapping("Update")
     public void updateCatalog(@PathVariable Long idCatalog, @RequestBody Catalog catalog) {
         Catalog existingCatalog = iCatalogService.getCatalogById(idCatalog);
         if (existingCatalog != null) {
@@ -39,7 +39,7 @@ public class CatalogController {
     }
 
 
-    @DeleteMapping("DeletCatalog")
+    @DeleteMapping("Delete")
     public void deleteCatalog(@RequestParam long idCatalog){
         iCatalogService.deleteCatalog(idCatalog);
     }

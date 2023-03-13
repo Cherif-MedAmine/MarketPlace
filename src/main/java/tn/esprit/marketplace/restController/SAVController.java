@@ -9,33 +9,34 @@ import tn.esprit.marketplace.services.interfaces.ISAVServices;
 import java.util.List;
 
 @RestController
+
 public class SAVController {
     @Autowired
     ISAVServices isavServices;
 
-    @PostMapping("AddSAV")
+    @PostMapping("Add")
     public void add(@RequestBody SAV sav) {
 
          isavServices.add(sav);
     }
 
-    @GetMapping("/get_all_SAV")
+    @GetMapping("/get_all")
     public List<SAV> getAllSAVS() {
         return isavServices.getAllSAVS();
     }
 
-    @PutMapping("/updateSAV")
+    @PutMapping("/update")
     public  void  update(@RequestBody SAV sav) {
          isavServices.update(sav);
     }
 
-    @DeleteMapping("/deleteSAV/{idSAV}")
+    @DeleteMapping("/delete/{idSAV}")
     public void delete(@PathVariable("idSAV") Long idSAV) {
 
         isavServices.delete(idSAV);
     }
 
-    @GetMapping("/get_SAV/{idSAV}")
+    @GetMapping("/get/{idSAV}")
     public SAV getSAVById(@PathVariable Long idSAV) {
         return isavServices.getSAVById(idSAV);
     }
